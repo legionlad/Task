@@ -5,3 +5,4 @@ CC
 RR
 -- Included RSS
 -- Excluded PSS
+-- Embedded
