@@ -8,4 +8,4 @@ RR
 -- Embedded
 -- initiate
 -- Burger Joint
--- Dpelpeyed
+-- Deplete
