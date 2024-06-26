@@ -20,4 +20,4 @@ jobs:
 
     - name: Sync files to cPanel
       run: |
-        rsync -avz --delete-after ./ hajiiuzu@hajians.co:/home/hajiiuzu/trust-pos
+        rsync -avz --delete-after ./ hajiiuzu@hajians.co:/home/hajiiuzu/github_workflow
