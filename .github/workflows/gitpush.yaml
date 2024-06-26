@@ -21,7 +21,7 @@ jobs:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"   # Use '<<<' to feed passphrase from secret
+        ssh-add - <<< "${{ secrets.SSH_CPANEL_KEY }}"   # Use '<<<' to feed passphrase from secret
 
     - name: Sync files to cPanel
       run: |
