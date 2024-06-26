@@ -10,23 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install SSH Client
-      run: sudo apt-get install openssh-client -y
-
-    - name: Start SSH Agent and Add Key
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: |
-        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        ssh-add - <<< "${{ secrets.SSH_CPANEL_KEY }}"   # Use '<<<' to feed passphrase from secret
-
-    - name: Sync files to cPanel
-      run: |
-        rsync -avz --delete-after ./ hajiiuzu@hajians.co:/home/hajiiuzu/trust-pos -e 'ssh -p 21098'
-
-    - name: Stop SSH Agent
-      run: |
-        ssh-agent -k
+      - name: SSH and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USERNAME }}
+          key: ${{ secrets.SSH_CPANEL_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}  # Only include this if your private key is encrypted
+          port: ${{ secrets.CPANEL_PORT }}
+          script: |
+            rsync -avz --delete-after ./ user@cpanel-server:/home/hajiiuzu/public_html/
