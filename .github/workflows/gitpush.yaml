@@ -1,4 +1,4 @@
-name: Darewrho to cPanel
+name: Deploy to cPanel
 
 on:
   push:
@@ -13,12 +13,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_CPANEL_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        
+    - name: Install SSH Client
+      run: sudo apt-get install openssh-client -y
+
+    - name: Start SSH Agent and Add Key
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"   # Use '<<<' to feed passphrase from secret
+
     - name: Sync files to cPanel
       run: |
-        rsync -avz --delete-after ./ hajiiuzu@hajians.co:/home/hajiiuzu/github_workflow
+        rsync -avz --delete-after ./ hajiiuzu@hajians.co:/home/hajiiuzu/trust-pos -e 'ssh -p 21098'
+
+    - name: Stop SSH Agent
+      run: |
+        ssh-agent -k
