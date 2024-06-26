@@ -17,7 +17,8 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_CPANEL_KEY }}
-
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        
     - name: Sync files to cPanel
       run: |
         rsync -avz --delete-after ./ hajiiuzu@hajians.co:/home/hajiiuzu/github_workflow
