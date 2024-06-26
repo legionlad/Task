@@ -6,3 +6,4 @@ RR
 -- Included RSS
 -- Excluded PSS
 -- Embedded
+-- initiate
