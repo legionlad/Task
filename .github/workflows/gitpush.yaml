@@ -22,4 +22,4 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  # Only include this if your private key is encrypted
           port: ${{ secrets.CPANEL_PORT }}
           script: |
-            rsync -avz --delete-after ./ public_html/github_workflow
+            rsync -avz --delete-after --exclude '.*/' --exclude 'access-logs' --exclude '.cagefs'  ./ public_html/github_workflow
