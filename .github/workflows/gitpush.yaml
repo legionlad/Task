@@ -12,6 +12,6 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        localDir: ${checkout.path}
+        localDir: "/home/runner/work/Task/"
         remoteDir: "github_workflow"
         options: "--asci"
