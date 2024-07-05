@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to ftp server
-   steps:
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Check pull request
@@ -24,7 +24,7 @@ jobs:
                 )
               )
       - name: Upload files to ftp server
-        uses: ./ 
+        uses: ./ftp-action
         id: upload-to-ftp
         with:
           host: ${{ secrets.FTP_HOST }}
