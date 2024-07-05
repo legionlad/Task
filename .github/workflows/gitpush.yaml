@@ -25,4 +25,4 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  # Only include this if your private key is encrypted
           port: ${{ secrets.CPANEL_PORT }}
           script: |
-            rsync /*  /home/hajiiuzu/github_workflow/
+            rsync /*   home/hajiiuzu/github_workflow/
