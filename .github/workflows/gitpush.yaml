@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    name: Deploy to ftp server
    steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,5 +32,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           protocol: ftp
-          dir: /public_html/
+          dir: /github_workflow/
           args: --ftp-create-dir --ftp-verbose
